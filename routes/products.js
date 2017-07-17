@@ -10,7 +10,7 @@ router.route('/')
   res.render('index', {catalog: productsDB.getProduct()});
 })
 .post((req, res) => {
-  checkProperties(req, res);
+  productsDB.checkProperties(req, res, productsDB);
 });
 
 module.exports = router;
