@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Catalog</title>
+</head>
+<body>
+  {{#each catalog}}
+  <div class="product">
+    <h2>product: {{name}}</h2>
+    <p>price: {{price}}</p>
+    <p>inventory: {{inventory}}</p>
+    <p>id: {{id}}</p>
+  </div>
+  {{/each}}
+</body>
+</html>
