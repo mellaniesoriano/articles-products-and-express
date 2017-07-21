@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Articles</title>
+</head>
+<body>
+  <h1>Articles (index.hbs)</h1>
+<h1>{{deleteSuccess}}</h1>
+
+{{#each catalog}}
+  <div class = 'article'>
+    <h3>Title: {{title}}</h3>
+    <p>Body: {{body}}</p>
+    <p>Author: {{author}}</p>
+    <p>URL: {{urlTitle}}</p>
+  </div>
+{{/each}}
+</body>
+</html>
