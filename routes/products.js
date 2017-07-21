@@ -29,7 +29,7 @@ router.route('/:id')
   const idNum = parseFloat(req.params.id);
   if (productsDB.checkID(idNum)) {
     productsDB.deleteProduct(idNum);
-    res.render('index', productsDB.successMsg());
+    res.render('index', productsDB.successMsg('deleteSuccess'));
   } else {
     res.redirect('/products');
   }
