@@ -7,10 +7,47 @@ const productsDB = require('../db/productsDB.js');
 
 router.route('/')
 .get((req, res) => {
-  res.render('index', {catalog: productsDB.getProduct()});
+  res.render('index', {catalog: productsDB.allTheProducts()});
 })
 .post((req, res) => {
-  productsDB.checkProperties(req, res, productsDB);
+  productsDB.postProduct(req, res, productsDB);
+});
+
+router.route('/:id')
+.get((req, res) => {
+  const idNum = parseFloat(req.params.id);
+
+ productsDB.productId(idNum);
+ res.render('product', productsDB.productId());
+})
+.put((req,res) => {
+  const idNum = parseFloat(req.params.id);
+    productsDB.putProduct(req, res, productsDB, idNum);
+    // console.log('REQ.PARAMS', typeof idNum, idNum);
+  })
+.delete((req, res) => {
+  console.log('This is req.params.id..', req.params.id);
+  const idNum = parseFloat(req.params.id);
+  if (productsDB.checkID(idNum)) {
+    productsDB.deleteProduct(idNum);
+    res.render('index', productsDB.successMsg());
+  } else {
+    res.redirect('/products');
+  }
+});
+
+router.route('/new')
+.get((req, res) => {
+  res.render('new');
+});
+
+router.route('/:id/edit')
+.get((req, res) => {
+  const idNum = parseFloat(req.params.id);
+  productsDB.productId(idNum);
+  res.render('edit', products.productId());
 });
 
 module.exports = router;
+
+
