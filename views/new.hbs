@@ -5,12 +5,19 @@
   <title>Products</title>
 </head>
 <body>
-<h1>New Product (new.hbs)</h1>
+  <h1>Products (new.hbs)</h1>
 <h1>{{error}}</h1>
-   <form method="POST" action="/products" enctype="application/json">
-    <input type="text" name= "name" value= 'Product Name'>
-    <input type="text" name= "price" value= 'Price'>
-    <input type="text" name= "inventory" value= 'Inventory'>
+  <form action="/products/{{id}}" method="post">
+    <label form="name">Product</label>
+    <input type="text" name="name" value={{name}}>
+    <br>
+    <br>
+    <label for="price">Price</label>
+    <input type="text" name="price" value={{price}}>
+    <br>
+    <br>
+    <label for="inventory">Inventory</label>
+    <input type="text" name="inventory" value={{inventory}}>
     <br><br>
     <input type="submit" value="Submit">
   </form>
