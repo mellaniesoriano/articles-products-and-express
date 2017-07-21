@@ -19,9 +19,18 @@
     <br><br>
     <input type="hidden" name="_method" value="PUT">
     <input type="submit" value="Submit">
+  </form>
 
+  <form action="/products/{{id}}" method="POST">
     <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete">
   </form>
+
+  <div class='product'>
+    <h3>Product: {{name}}</h3>
+    <p>Price: ${{price}}</p>
+    <p>Inventory: {{inventory}}</p>
+    <p>ID: {{id}}</p>
+  </div>
 </body>
 </html>
