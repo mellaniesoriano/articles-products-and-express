@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Product Catalog</title>
+  <title>Catalog</title>
 </head>
 <body>
   {{#each catalog}}
-  <div class="product">
-    <h2>product: {{name}}</h2>
-    <p>price: {{price}}</p>
-    <p>inventory: {{inventory}}</p>
-    <p>id: {{id}}</p>
+  <div class = 'product'>
+  <h1>Index.HBS</h1>
+    <h3>Product: {{name}}</h3>
+    <p>Price: ${{price}}</p>
+    <p>Inventory: {{inventory}}</p>
+    <p>ID: {{id}}</p>
   </div>
   {{/each}}
 </body>
