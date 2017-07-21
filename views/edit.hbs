@@ -7,16 +7,20 @@
 <body>
   <h1>Products (edit.hbs)</h1>
 <h1>{{error}}</h1>
+  <form action="/products/{{id}}" method="POST">
+    <label form="name">Product</label>
+    <input type="text" name="name" value={{name}}>
 
-  <form method="POST" action="/products/{{id}}?_method=PUT">
-    <input type="text" name= "name" value= {{name}}>
-    <input type="text" name= "price" value= {{price}}>
-    <input type="text" name= "inventory" value= {{inventory}}>
+    <label for="price">Price</label>
+    <input type="text" name="price" value={{price}}>
+
+    <label for="inventory">Inventory</label>
+    <input type="text" name="inventory" value={{inventory}}>
     <br><br>
+    <input type="hidden" name="_method" value="PUT">
     <input type="submit" value="Submit">
-  </form>
 
-  <form method="POST" action="/products/{{id}}?_method=DELETE">
+    <input type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete">
   </form>
 </body>
