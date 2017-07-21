@@ -4,6 +4,7 @@ const router = express.Router();
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const productsDB = require('../db/productsDB.js');
+const methodOverride = require('method-override');
 
 router.route('/')
 .get((req, res) => {
@@ -16,17 +17,15 @@ router.route('/')
 router.route('/:id')
 .get((req, res) => {
   const idNum = parseFloat(req.params.id);
-
+  console.log('what am i getting?', productsDB.productId(idNum));
  productsDB.productId(idNum);
- res.render('product', productsDB.productId());
+ res.render('product', productsDB.productId(idNum));
 })
 .put((req,res) => {
   const idNum = parseFloat(req.params.id);
     productsDB.putProduct(req, res, productsDB, idNum);
-    // console.log('REQ.PARAMS', typeof idNum, idNum);
   })
 .delete((req, res) => {
-  console.log('This is req.params.id..', req.params.id);
   const idNum = parseFloat(req.params.id);
   if (productsDB.checkID(idNum)) {
     productsDB.deleteProduct(idNum);
@@ -45,7 +44,7 @@ router.route('/:id/edit')
 .get((req, res) => {
   const idNum = parseFloat(req.params.id);
   productsDB.productId(idNum);
-  res.render('edit', products.productId());
+  res.render('edit', productsDB.productId(idNum));
 });
 
 module.exports = router;
