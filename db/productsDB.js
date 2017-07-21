@@ -28,7 +28,7 @@ const postProduct = (req, res, productsDB) => {
     productsDB.catalogObj(req.body);
     res.redirect('/products');
   } else {
-    res.render('new', productsDB.errorMsg('newError'));
+    res.render('new', productsDB.error('newError'));
   }
 };
 
@@ -40,7 +40,6 @@ const productId = (idNum) => {
       product = catalog[i];
     }
   }
-  console.log('checking product..', product);
   return product;
 };
 
@@ -60,6 +59,8 @@ const editProduct = (body, idNum) => {
   catalog.forEach((x) => {
     if (x.id === idNum) {
       x.name = body.name;
+      x.price = body.price;
+      x.inventory = body.inventory;
     }
   });
   console.log(catalog);
@@ -72,11 +73,9 @@ const putProduct = (req, res, productsDB, idNum) => {
 
   if (propertiesExist) {
     productsDB.editProduct(req.body, idNum);
-    // console.log('put worked!');
     res.redirect(303, `/products/${idNum}`);
   } else {
-    // console.log('nooope, try again');
-    res.render('edit', productsDB.error('editError'));
+    res.render('edit', {error: productsDB.error('editError')});
   }
 };
 
