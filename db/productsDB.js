@@ -75,7 +75,7 @@ const putProduct = (req, res, productsDB, idNum) => {
     productsDB.editProduct(req.body, idNum);
     res.redirect(303, `/products/${idNum}`);
   } else {
-    res.render('edit', {error: productsDB.error('editError')});
+    res.render('edit', productsDB.error('editError'));
   }
 };
 
