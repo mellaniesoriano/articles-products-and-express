@@ -22,6 +22,7 @@ const catalogObj = (body) => {
 
 // displays posted products
 const postProduct = (req, res, productsDB) => {
+  console.log(req.body);
   let propertiesExist = (req.body.hasOwnProperty('name') && req.body.hasOwnProperty('price') && req.body.hasOwnProperty('inventory'));
 
   if (propertiesExist) {
