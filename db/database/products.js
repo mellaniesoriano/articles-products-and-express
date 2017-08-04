@@ -6,19 +6,20 @@ const db = pgp(connection.connectionOptions);
 // const connection = require('./connection.js');
 
 const getAllProducts = () => {
-  return db.query('SELECT * FROM products');
+  return db.any('SELECT * FROM products');
 };
 
 const postToDb = (postInfo) => {
-  let catalog = {
-    name : postInfo.name,
-    price : postInfo.price,
-    inventory : postInfo.inventory
-  };
-  return db.none('INSERT INTO products VALUES(default, ${name}, ${price}, ${inventory})', catalog);
+  return db.none('INSERT INTO products( name, price, inventory) VALUES($1, $2, $3)', [postInfo.name, postInfo.price, postInfo.inventory]);
+};
+
+const getProdId = (id) => {
+  console.log(id);
+  return db.one('SELECT * FROM products WHERE id = $1', [id]);
 };
 
 module.exports = {
   getAllProducts,
-  postToDb
+  postToDb,
+  getProdId
 };
