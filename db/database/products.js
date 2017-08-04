@@ -9,8 +9,13 @@ const getAllProducts = () => {
   return db.query('SELECT * FROM products');
 };
 
-const postToDb = () => {
-  return db.one('INSERT INTO products(id, name, price, inventory) VALUES(${id}, ${name}, ${price}, ${inventory})');
+const postToDb = (postInfo) => {
+  let catalog = {
+    name : postInfo.name,
+    price : postInfo.price,
+    inventory : postInfo.inventory
+  };
+  return db.none('INSERT INTO products VALUES(default, ${name}, ${price}, ${inventory})', catalog);
 };
 
 module.exports = {
