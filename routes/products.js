@@ -13,11 +13,12 @@ router.route('/')
   db.getAllProducts()
     .then((data) => {
       console.log('data showing?', data);
+      res.render('index', {catalog: data});
     })
     .catch((err) => {
       console.log('did not get');
+      console.log(err);
     });
-  res.render('index', {catalog: productsDB.allTheProducts()});
 })
 .post((req, res) => {
   db.postToDb(req.body)
@@ -26,16 +27,23 @@ router.route('/')
     })
     .catch((err) => {
       console.log('did not post');
+      console.log(err);
     });
   productsDB.postProduct(req, res, productsDB);
 });
 
 router.route('/:id')
 .get((req, res) => {
-  const idNum = parseFloat(req.params.id);
-  console.log('what am i getting?', productsDB.productId(idNum));
- productsDB.productId(idNum);
- res.render('product', productsDB.productId(idNum));
+  db.getProdId(req.params.id)
+    .then((data) => {
+      res.render('product', data);
+      console.log('ID data?', data);
+    })
+    .catch((err) => {
+      console.log(err);
+      // res.redirect('/products');
+    });
+
 })
 .put((req,res) => {
   const idNum = parseFloat(req.params.id);
