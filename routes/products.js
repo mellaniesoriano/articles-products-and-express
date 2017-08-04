@@ -20,14 +20,14 @@ router.route('/')
   res.render('index', {catalog: productsDB.allTheProducts()});
 })
 .post((req, res) => {
-  productsDB.postProduct(req, res, productsDB);
-  db.postToDb()
+  db.postToDb(req.body)
     .then((data) => {
-      console.log(data);
+      console.log('data posting?', req.body);
     })
     .catch((err) => {
       console.log('did not post');
     });
+  productsDB.postProduct(req, res, productsDB);
 });
 
 router.route('/:id')
