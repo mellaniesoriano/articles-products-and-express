@@ -6,12 +6,28 @@ const bodyParser = require('body-parser');
 const productsDB = require('../db/productsDB.js');
 const methodOverride = require('method-override');
 
+const db = require('../db/database/products.js');
+
 router.route('/')
 .get((req, res) => {
+  db.getAllProducts()
+    .then((data) => {
+      console.log('data showing?', data);
+    })
+    .catch((err) => {
+      console.log('did not get');
+    });
   res.render('index', {catalog: productsDB.allTheProducts()});
 })
 .post((req, res) => {
   productsDB.postProduct(req, res, productsDB);
+  db.postToDb()
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log('did not post');
+    });
 });
 
 router.route('/:id')
@@ -48,5 +64,4 @@ router.route('/:id/edit')
 });
 
 module.exports = router;
-
 
