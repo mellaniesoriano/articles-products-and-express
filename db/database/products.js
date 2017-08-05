@@ -15,11 +15,16 @@ const postToDb = (postInfo) => {
 
 const getProdId = (id) => {
   console.log(id);
-  return db.one('SELECT * FROM products WHERE id = $1', [id]);
+  return db.any('SELECT * FROM products WHERE id = $1', [id]);
+};
+
+const editById = (newProdInfo, id) => {
+  return db.none('UPDATE products SET name = $1, price = $2, inventory = $3 WHERE ID = $4', [newProdInfo.name, newProdInfo.price, newProdInfo.inventory, id]);
 };
 
 module.exports = {
   getAllProducts,
   postToDb,
-  getProdId
+  getProdId,
+  editById
 };
