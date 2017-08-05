@@ -36,8 +36,8 @@ router.route('/:id')
 .get((req, res) => {
   db.getProdId(req.params.id)
     .then((data) => {
-      res.render('product', data);
-      console.log('ID data?', data);
+      res.render('product', data[0]);
+      // console.log('ID data?', data);
     })
     .catch((err) => {
       console.log(err);
@@ -46,8 +46,15 @@ router.route('/:id')
 
 })
 .put((req,res) => {
-  const idNum = parseFloat(req.params.id);
-    productsDB.putProduct(req, res, productsDB, idNum);
+  // const idNum = parseFloat(req.params.id);
+  //   productsDB.putProduct(req, res, productsDB, idNum);
+  db.editById(req.body, req.params.id)
+    .then(() => {
+      res.redirect(`/products${req.path}`);
+    })
+    .catch((err) => {
+      res.redirect(`/products${req.path}/edit`);
+    });
   })
 .delete((req, res) => {
   const idNum = parseFloat(req.params.id);
@@ -66,9 +73,17 @@ router.route('/new')
 
 router.route('/:id/edit')
 .get((req, res) => {
-  const idNum = parseFloat(req.params.id);
-  productsDB.productId(idNum);
-  res.render('edit', productsDB.productId(idNum));
+  db.getProdId(req.params.id)
+    .then((data) => {
+      res.render('edit', data[0]);
+    })
+    .catch(() => {
+      res.render('/products');
+    });
+
+  // const idNum = parseFloat(req.params.id);
+  // productsDB.productId(idNum);
+  // res.render('edit', productsDB.productId(idNum));
 });
 
 module.exports = router;
